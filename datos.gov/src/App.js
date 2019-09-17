@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import navio from "./navio";
 
 export default class App extends React.Component{
   constructor(props) {
@@ -23,19 +22,28 @@ change() {
 handleSubmit(event) { 
   event.preventDefault();
   alert(`${this.url.value}`);
+  fetch(`${this.url.value}`)
+  .then(req => {
+    return req.json();
+  })
+  .then(data => {
+    console.log(data);
+  });
   
   }
  render() {
   return (
     <div>
+    <div>
       <h1>Visualización datos de datos.gov.co</h1>
       <form className="form" onSubmit={this.handleSubmit} >
-      {/* value={this.state.url}*/}
         <input placeholder="Ingresa una url" type="text" 
         ref={ url => this.url = url}  onChange = {this.change.bind(this)}  />
         <br/>
         <input type="submit" value="CONSULTAR" />
         </form >
+    </div>
+    <div id="navio"></div>
     </div>
   );
  
