@@ -18,40 +18,45 @@ export default class App extends React.Component {
     this.url = e.target.value;
   }
 
-  handleSubmit(event) {
-    let termino = false;
-    event.preventDefault();
-    alert(`${this.url}`);
-    let c = 0;
-    let temp = [0];
-    while (!termino) {
-      fetch(`${this.url}?$limit=1000&$offset=${1000 * c}`)
-        .then(req => {
-          return req.json();
-        })
-        .then(data => {
-          if (data.length !== 0) {
-            console.log(data.length);
-            termino=true;
-            this.setState({dataNavio : data});
-            console.log(this.state.dataNavio);
-            // setTimeout(() => {
-            //   console.log("Esperando");
-            //   temp.concat(data);
-            //   console.log(this.state.dataNavio);
-            //   c++;
-            // }, 2000);
+  doReq(c) {
+    return new Promise((res, rej) => {
+      (async () => {
+        try {
+          const req = await fetch(`${this.url}?$limit=100&$offset=${1000 * c}`);
+          const data = await req.json();
 
+          if (data.length !== 0) {
+            res({ termino: false, data });
           }
           else {
-            termino = true;
-            // this.setState({dataNavio : temp});
+            res({ termino: true, data:[] });
           }
-        });
+        } catch (error) {
+          rej(error);
+        }
+      })();
+    });
 
-    }
+  }
 
+  handleSubmit(event) {
+    (async () => {
 
+      let termino = false;
+      event.preventDefault();
+      alert(`${this.url}`);
+      let c = 0;
+      let temp = [];
+      while (!termino) {
+        const req = await this.doReq(c);
+        termino = req.termino;
+        console.log(req.data);
+        temp = [...temp, ...req.data];
+        c++;
+      }
+      
+      this.setState({dataNavio:temp});
+    })();
   }
 
   render() {
