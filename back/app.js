@@ -7,9 +7,17 @@ var indexRouter = require('./routes/index')
 var historico = require('./routes/historico')
 
 var app = express()
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, 'public')))
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('front/build'))
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'front', 'build', 'index.html'))
+  })
+}
 
 app.use('/', indexRouter)
 app.use('/historico', historico)
