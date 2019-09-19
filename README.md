@@ -29,6 +29,7 @@ Clonar el repositorio y una vez allí ejecutar los siguientes comandos:
 ![Desplegado localmente](https://github.com/DanielaRocha6/Visualizacion-datos.gov.co/blob/master/desplegado_local)
 ![Desplegado en heroku](https://github.com/DanielaRocha6/Visualizacion-datos.gov.co/blob/master/desplegadoHeroku)
 
+Accediendo a este [video](https://youtu.be/aoxqlY5ju_8) puede verse también la funcionalidad de la aplicación.
 Se manejó una base de datos de mlab para la cual se tuvo que crear usuario y contraseña. Al configurar la aplicación en heroku se declararon las variables de entorno y al acceder a heroku config estas se encuentran configuradas. Sin embargo, en la página de heroku no se muestra el histórico de consultas (que requiere de mongo), pero en la versión local sí se puede ver este histórico y acceder tal cual se dice en la descripción inicial.
 
 # Licencia MIT
