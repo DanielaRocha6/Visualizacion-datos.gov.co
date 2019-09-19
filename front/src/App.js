@@ -145,7 +145,7 @@ export default class App extends React.Component {
           {this.state.history.map(item => (
             <button onClick={(e) => this.handleClick(e, `${item}`)}>{item}<br /></button>
           ))}
-          <button onClick={this.deleteHistory} id="eliminar">Restablecer histórico</button>
+          {/* <button onClick={this.deleteHistory} id="eliminar">Restablecer histórico</button> */}
         </div>
         <div id="navio">
           {this.state.dataNavio && <Navio data={this.state.dataNavio} />}
