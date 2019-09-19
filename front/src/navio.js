@@ -8,14 +8,8 @@ export default class Navio extends React.Component{
         this.refDiv = React.createRef();
       }
 
-    //   componentDidMount() {
-    //       this.loadNavio();
-    //   }
-
       componentDidUpdate() {
           this.loadNavio();
-        // console.log(this.props.data);
-        
       }
 
       loadNavio(){
